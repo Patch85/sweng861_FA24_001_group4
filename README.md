@@ -1,8 +1,6 @@
 # sweng861_FA24_001_group4
 Talent Management System project for SWENG 861, Software Construction, Fall 2024
 
-Certainly! Below is a set of instructions that you can include in the README of your repository to guide contributors on how to work with the Git branching strategy:
-
 ---
 
 ## Git Branching Strategy
