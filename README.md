@@ -79,3 +79,7 @@ This repository follows a structured Git branching strategy to ensure stability,
 - **Pull Requests**: Ensure all PRs are reviewed and pass automated tests before merging.
 - **Branch Deletion**: After merging, consider deleting the feature, release, or hotfix branch to keep the repository clean.
 - **Branch Protection**: The `main` and `develop` branches are protected. Direct commits to these branches are restricted.
+- **Merging**: After review and approval, PRs will be merged to the target branch (`development`, `main`), with a merge commit using GitHub's default message & merge strategy. This is easiest t accomplish using the GitHub interface, and results in the execution of the following command:
+```bash
+git merge [BRANCH] -m "Merge pull request [PULL REQUEST #] from [BRANCH]" --no-ff
+```
