@@ -1,0 +1,79 @@
+@startuml component-diagram
+title Component Diagram - Talent Management System
+
+actor "End User" as User
+
+package "Frontend (React.js)" {
+    component "Login Page"
+    component "Dashboard"
+    component "Resource Page"
+    component "Project Page"
+    component "Search & Filter Page"
+}
+
+package "API Gateway" {
+    component "REST API" {
+        interface "User API"
+        interface "Resource API"
+        interface "Project API"
+        interface "Notification API"
+        interface "Search & Filter API"
+        interface "Chatbot API"
+    }
+}
+
+package "Microservices" {
+    component "User Management Service" {
+        interface "Auth0 API"
+        component "User DB (MongoDB)"
+    }
+    
+    component "Resource Management Service" {
+        component "Resource DB (MongoDB)"
+    }
+    
+    component "Project Management Service" {
+        component "Project DB (MongoDB)"
+    }
+    
+    component "Notification Service" {
+        interface "Email Service API"
+    }
+    
+    component "Search & Filter Service" {
+        component "Search & Filter DB (MongoDB)"
+    }
+    
+    component "Chatbot Service"
+}
+
+User --> "Login Page"
+User --> "Dashboard"
+"Login Page" --> "User API"
+"Dashboard" --> "Resource API"
+"Dashboard" --> "Project API"
+"Resource Page" --> "Resource API"
+"Project Page" --> "Project API"
+"Search & Filter Page" --> "Search & Filter API"
+
+"User API" --> "User Management Service"
+"User Management Service" --> "User DB (MongoDB)"
+"User Management Service" --> "Auth0 API"
+
+"Resource API" --> "Resource Management Service"
+"Resource Management Service" --> "Resource DB (MongoDB)"
+
+"Project API" --> "Project Management Service"
+"Project Management Service" --> "Project DB (MongoDB)"
+
+"Notification API" --> "Notification Service"
+"Notification Service" --> "Email Service API"
+
+"Search & Filter API" --> "Search & Filter Service"
+"Search & Filter Service" --> "Search & Filter DB (MongoDB)"
+
+"Chatbot API" --> "Chatbot Service"
+
+@enduml
+
+@enduml

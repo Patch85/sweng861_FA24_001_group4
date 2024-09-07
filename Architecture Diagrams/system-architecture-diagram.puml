@@ -1,0 +1,54 @@
+@startuml system-architecture-diagram
+title System Architecture - Talent Management System
+
+actor "End User" as User
+
+package "Web Application" {
+    [Frontend (React.js)]
+}
+
+package "API Gateway" {
+    [REST API]
+}
+
+package "Microservices" {
+    [User Management Service]
+    [Resource Management Service]
+    [Project Management Service]
+    [Notification Service]
+    [Search & Filter Service]
+    [Chatbot Service]
+}
+
+package "Databases" {
+    [User DB (MongoDB)]
+    [Resource DB (MongoDB)]
+    [Project DB (MongoDB)]
+    [Search & Filter DB (MongoDB)]
+}
+
+package "External Services" {
+    [Auth0] <<external>>
+    [Email Service] <<external>>
+}
+
+User --> [Frontend (React.js)]
+[Frontend (React.js)] --> [REST API]
+
+[REST API] --> [User Management Service]
+[REST API] --> [Resource Management Service]
+[REST API] --> [Project Management Service]
+[REST API] --> [Notification Service]
+[REST API] --> [Search & Filter Service]
+[REST API] --> [Chatbot Service]
+
+[User Management Service] --> [User DB (MongoDB)]
+[Resource Management Service] --> [Resource DB (MongoDB)]
+[Project Management Service] --> [Project DB (MongoDB)]
+[Search & Filter Service] --> [Search & Filter DB (MongoDB)]
+
+[User Management Service] --> [Auth0]
+[Notification Service] --> [Email Service]
+
+
+@enduml
