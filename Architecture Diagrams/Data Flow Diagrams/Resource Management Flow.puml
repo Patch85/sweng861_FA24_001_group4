@@ -1,0 +1,31 @@
+@startuml resource-management-flow-diagram
+title Data Flow Diagram - Resource Management Flow
+
+actor "End User" as User
+
+rectangle "Web Application (React.js)" {
+    rectangle "Dashboard"
+    rectangle "Resource Page"
+}
+
+rectangle "API Gateway" {
+    rectangle "REST API" {
+        rectangle "Resource API"
+    }
+}
+
+rectangle "Microservices" {
+    rectangle "Resource Management Service" {
+        rectangle "Resource DB (MongoDB)"
+    }
+}
+
+User --> "Dashboard" : Access Dashboard
+User --> "Resource Page" : Request Resources
+"Resource Page" --> "Resource API" : Request Resource Data
+"Resource API" --> "Resource Management Service" : Fetch Resources
+"Resource Management Service" --> "Resource DB (MongoDB)" : Query Resources
+"Resource Management Service" --> "Resource API" : Return Resource Data
+"Resource API" --> "Resource Page" : Display Resources
+
+@enduml

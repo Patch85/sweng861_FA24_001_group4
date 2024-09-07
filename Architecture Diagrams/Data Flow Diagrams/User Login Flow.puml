@@ -1,0 +1,32 @@
+@startuml user-login-flow-diagram
+title Data Flow Diagram - User Login Flow
+
+actor "End User" as User
+
+rectangle "Web Application (React.js)" {
+    rectangle "Login Page"
+}
+
+rectangle "API Gateway" {
+    rectangle "REST API" {
+        rectangle "User API"
+    }
+}
+
+rectangle "Microservices" {
+    rectangle "User Management Service" {
+        rectangle "User DB (MongoDB)"
+        rectangle "Auth0 API"
+    }
+}
+
+User --> "Login Page" : Login Request
+"Login Page" --> "User API" : Send Login Data
+"User API" --> "Auth0 API" : Authenticate User
+"Auth0 API" --> "User API" : Return Token
+"User API" --> "User Management Service" : Fetch User Data
+"User Management Service" --> "User DB (MongoDB)" : Retrieve User Info
+"User Management Service" --> "User API" : Return User Info
+"User API" --> "Login Page" : Send User Data
+
+@enduml

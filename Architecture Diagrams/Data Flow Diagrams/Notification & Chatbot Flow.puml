@@ -1,0 +1,29 @@
+@startuml notification-chatbot-flow
+title Data Flow Diagram - Notification and Chatbot Flow
+
+actor "End User" as User
+
+rectangle "API Gateway" {
+    rectangle "REST API" {
+        rectangle "Notification API"
+        rectangle "Chatbot API"
+    }
+}
+
+rectangle "Microservices" {
+    rectangle "Notification Service" {
+        rectangle "Email Service API"
+    }
+
+    rectangle "Chatbot Service"
+}
+
+"Notification API" --> "Notification Service" : Send Notification
+"Notification Service" --> "Email Service API" : Send Email
+
+User --> "Chatbot API" : Chat Request
+"Chatbot API" --> "Chatbot Service" : Process Request
+"Chatbot Service" --> "Chatbot API" : Respond to Chat
+"Chatbot API" --> User : Display Chat Response
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml project-management-flow-diagram
+title Data Flow Diagram - Project Management Flow
+
+actor "End User" as User
+
+rectangle "Web Application (React.js)" {
+    rectangle "Project Page"
+}
+
+rectangle "API Gateway" {
+    rectangle "REST API" {
+        rectangle "Project API"
+    }
+}
+
+rectangle "Microservices" {
+    rectangle "Project Management Service" {
+        rectangle "Project DB (MongoDB)"
+    }
+}
+
+User --> "Project Page" : View Projects
+"Project Page" --> "Project API" : Request Project Data
+"Project API" --> "Project Management Service" : Fetch Projects
+"Project Management Service" --> "Project DB (MongoDB)" : Query Projects
+"Project Management Service" --> "Project API" : Return Project Data
+"Project API" --> "Project Page" : Display Projects
+
+@enduml

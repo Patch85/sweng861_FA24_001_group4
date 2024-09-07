@@ -1,0 +1,29 @@
+@startuml search-filter-flow
+title Data Flow Diagram - Search & Filter Flow
+
+actor "End User" as User
+
+rectangle "Web Application (React.js)" {
+    rectangle "Search & Filter Page"
+}
+
+rectangle "API Gateway" {
+    rectangle "REST API" {
+        rectangle "Search & Filter API"
+    }
+}
+
+rectangle "Microservices" {
+    rectangle "Search & Filter Service" {
+        rectangle "Search & Filter DB (MongoDB)"
+    }
+}
+
+User --> "Search & Filter Page" : Search Data
+"Search & Filter Page" --> "Search & Filter API" : Search Query
+"Search & Filter API" --> "Search & Filter Service" : Process Query
+"Search & Filter Service" --> "Search & Filter DB (MongoDB)" : Retrieve Search Results
+"Search & Filter Service" --> "Search & Filter API" : Return Search Results
+"Search & Filter API" --> "Search & Filter Page" : Display Results
+
+@enduml
