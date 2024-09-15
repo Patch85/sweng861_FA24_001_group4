@@ -1,0 +1,42 @@
+@startuml project-structure-diagram
+package "root" {
+    package "services" {
+        package "user-management-service" {
+            package "src" 
+            package "tests" 
+            file "package.json"
+            file "Dockerfile"
+        }
+        package "talent-listing-service" {
+            package "src" 
+            package "tests" 
+            file "package.json"
+            file "Dockerfile"
+        }
+        package "resource-management-service" {
+            package "src" 
+            package "tests" 
+            file "package.json"
+            file "Dockerfile"
+        }
+    }
+
+    package "shared" {
+        package "utils"
+        package "models"
+        package "middleware"
+    }
+
+    package "ci-cd" {
+        package "pipelines" {
+            file "azure-pipelines.yml"
+        }
+    }
+
+    package "docs" {
+        file "testing-strategy.md"
+    }
+    
+    file "README.md"
+}
+@enduml
