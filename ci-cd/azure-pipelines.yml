@@ -1,0 +1,62 @@
+# ci-cd/azure-pipelines.yml
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  # Checkout the repository
+  - task: Checkout@v2
+    displayName: 'Checkout Repository'
+
+  # Set up Node.js
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
+    displayName: 'Set up Node.js'
+
+  # Install dependencies
+  - script: |
+      cd services/talent-management
+      npm install
+    displayName: 'Install dependencies'
+
+  # Run Unit Tests
+  - script: |
+      cd services/talent-management
+      npm test
+    displayName: 'Run Unit Tests'
+
+  # Build Docker Image
+  - task: Docker@2
+    inputs:
+      command: 'build'
+      dockerfile: 'services/talent-management/Dockerfile'
+      containerName: 'talent-management-service'
+      tags: 'latest'
+    displayName: 'Build Docker Image'
+
+  # Push Docker Image (in work)
+  # Uncomment and set up appropriate registry service connections
+  
+  # - task: Docker@2
+  #   inputs:
+  #     command: 'login'
+  #     containerRegistry: '<Registry Service Connection>'
+  #     displayName: 'Login to Azure Container Registry'
+
+  # - task: Docker@2
+  #   inputs:
+  #     command: 'push'
+  #     imageName: 'talent-listing-service:latest'
+  #     displayName: 'Push Docker Image to Registry'
+
+  # Publish Test Results
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-results.xml'
+      testRunTitle: 'Talent Service Unit Tests'
+    displayName: 'Publish Test Results'
