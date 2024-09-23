@@ -1,0 +1,95 @@
+/* Home Page General Layout */
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #45525a;  /* The same background color as per your wireframe */
+    height: 100vh;
+  }
+  
+  .home-left {
+    color: #fff;
+    width: 50%;
+  }
+  
+  .main-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+  
+  /* Right Side - Login/Sign Up Form */
+  .home-right {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 40%;
+    height: 55%;
+  }
+  
+  .login-title, .quick-signup-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .login-btn {
+    background-color: #45525a;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .google-signup-btn {
+    background-color: #4285f4;
+    color: white;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .google-logo {
+    margin-right: 10px;
+  }
+  
+  .or-text {
+    text-align: center;
+    font-size: 1em;
+  }
+  
+  .password-text {
+    font-size: 0.8em;
+    color: #666;
+  }
