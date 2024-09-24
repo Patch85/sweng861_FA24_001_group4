@@ -1,0 +1,66 @@
+/* General layout for the Dashboard */
+.dashboard-container {
+    padding: 20px;
+    background-color: #45525a;
+    color: #fff;
+    height: 100vh;
+  }
+  
+  .dashboard-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Buttons for Talent and Projects */
+  .dashboard-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-btn {
+    padding: 15px;
+    background-color: #fff;
+    color: #45525a;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 40%;
+  }
+  
+  .dashboard-btn:hover {
+    background-color: #ddd;
+  }
+  
+  /* Tabs for Projects and Talent */
+  .tabs-container {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #45525a;
+    border-radius: 5px 5px 0 0;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .tab:hover {
+    background-color: #ddd;
+  }
+  
+  /* Content Area */
+  .content-area {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    color: #45525a;
+    height: 300px;
+  }
+  
