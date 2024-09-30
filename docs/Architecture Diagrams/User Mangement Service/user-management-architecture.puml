@@ -1,0 +1,36 @@
+@startuml workflow
+actor User
+participant "Home.js (React)" as Home
+participant "authRoutes.js (User Management)" as authRoutes
+participant "authController.js (User Management)" as authController
+participant "userModel.js (User Management)" as userModel
+participant "MongoDB (User Management)" as UserDB
+
+participant "Talent.js (React)" as TalentForm
+participant "talentRoutes.js (Talent Management)" as talentRoutes
+participant "talentController.js (Talent Management)" as talentController
+participant "talentModel.js (Talent Management)" as talentModel
+participant "MongoDB (Talent Management)" as TalentDB
+
+== User Registration Flow ==
+User -> Home: Fills registration form
+Home -> authRoutes: POST /register
+authRoutes -> authController: Call register() function
+authController -> userModel: Create new User object
+userModel -> UserDB: Save user data to User Management DB
+UserDB -> userModel: Confirm save
+userModel -> authController: Return success
+authController -> authRoutes: Send success response
+authRoutes -> Home: User registered successfully
+
+== Talent Submission Flow ==
+User -> TalentForm: Fills talent submission form
+TalentForm -> talentRoutes: POST /data
+talentRoutes -> talentController: Call addTalent() function
+talentController -> talentModel: Create new Talent object
+talentModel -> TalentDB: Save talent data to Talent Management DB
+TalentDB -> talentModel: Confirm save
+talentModel -> talentController: Return success
+talentController -> talentRoutes: Send success response
+talentRoutes -> TalentForm: Talent added successfully
+@enduml

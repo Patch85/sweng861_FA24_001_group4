@@ -1,0 +1,47 @@
+@startuml data-management
+actor Client as "Client (Browser or App)"
+participant "Front-End" as FE
+participant "RESTful API" as API
+participant "Backend Logic" as Backend
+participant "MongoDB" as DB
+
+== Create Data Flow (POST /data) ==
+Client -> FE : Enter Data to Submit
+FE -> API : POST /data
+API -> Backend : Validate Data
+Backend -> DB : Insert New Data
+DB --> Backend : Data Inserted
+Backend --> API : Data Creation Success
+API --> FE : Data Created Response
+FE --> Client : Show Data Submission Success
+
+== Read Data Flow (GET /data) ==
+Client -> FE : Request Data
+FE -> API : GET /data
+API -> Backend : Fetch Data
+Backend -> DB : Retrieve Data
+DB --> Backend : Return Data
+Backend --> API : Data Retrieved
+API --> FE : Return Data List
+FE --> Client : Display Data
+
+== Update Data Flow (PUT /data/{id}) ==
+Client -> FE : Modify Data
+FE -> API : PUT /data/{id}
+API -> Backend : Validate and Update Data
+Backend -> DB : Update Data by ID
+DB --> Backend : Data Updated
+Backend --> API : Data Update Success
+API --> FE : Data Updated Response
+FE --> Client : Show Update Success
+
+== Delete Data Flow (DELETE /data/{id}) ==
+Client -> FE : Request Data Deletion
+FE -> API : DELETE /data/{id}
+API -> Backend : Validate and Delete Data
+Backend -> DB : Delete Data by ID
+DB --> Backend : Data Deleted
+Backend --> API : Data Deletion Success
+API --> FE : Deletion Response
+FE --> Client : Show Deletion Success
+@enduml
