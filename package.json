@@ -17,5 +17,8 @@
     "services/project-management",
     "services/talent-management",
     "services/user-management"
-  ]
+  ],
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

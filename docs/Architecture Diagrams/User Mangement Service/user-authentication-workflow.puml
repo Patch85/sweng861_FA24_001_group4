@@ -1,0 +1,35 @@
+@startuml user-authentication
+actor Client as "Client (Browser or App)"
+participant "Front-End" as FE
+participant "RESTful API" as API
+participant "Backend Logic" as Backend
+participant "MongoDB" as DB
+
+' User Registration Flow
+Client -> FE : Enter Registration Data
+FE -> API : POST /auth/register
+API -> Backend : Process Registration Data
+Backend -> DB : Insert Hashed Password / Store User Data
+DB --> Backend : Confirm User Data Stored
+Backend --> API : Registration Successful
+API --> FE : Response: Registration Complete
+FE --> Client : Show Registration Success
+
+== User Login Flow ==
+Client -> FE : Enter Login Credentials
+FE -> API : POST /auth/login
+API -> Backend : Validate Credentials
+Backend -> DB : Retrieve User Data
+DB --> Backend : Return Hashed Password
+Backend -> Backend : Compare Passwords
+alt Credentials Valid
+    Backend -> Backend : Generate JWT Token
+    Backend --> API : Token + Login Success
+    API --> FE : Return JWT Token
+    FE --> Client : Show Login Success / Redirect to Dashboard
+else Credentials Invalid
+    Backend --> API : Return Login Failure
+    API --> FE : Invalid Credentials Message
+    FE --> Client : Show Error Message
+end
+@enduml

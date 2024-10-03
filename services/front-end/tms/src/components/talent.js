@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import './talent.css';  // Assuming we will style using CSS
 import DatePicker from "react-datepicker";  // To handle date picking
 import "react-datepicker/dist/react-datepicker.css";  // DatePicker styles
+import axios from 'axios';  // Import Axios
 
 function Talent() {
   // State for input fields
@@ -89,22 +90,30 @@ function Talent() {
     }, [firstName, lastName, position, experienceLevel, location, email, phoneNumber, startDate, endDate, skills]);
 
   // Handle form submission
-  const handleAddTalent = (e) => {
+  const handleAddTalent = async (e) => {
     e.preventDefault();
 
-    // If the form is valid, submit the form
-    if (isFormValid) {
-      const talent = {
-        firstName,
-        lastName,
-        position,
-        experienceLevel,
-        location,
-        email,
-        phoneNumber,
-        availability: `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`,
-        skills
-      };
+  // If the form is valid, submit the form
+  if (isFormValid) {
+    const talent = {
+      firstName,
+      lastName,
+      position,
+      experienceLevel,
+      location,
+      email,
+      phoneNumber,
+      availability: {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      },
+      skills,
+    };
+
+    try {
+      // Send POST request to the backend service
+      const response = await axios.post('http://localhost:5002/data', talent);  // Assuming Talent Management runs on port 5002
+      console.log('Talent added successfully:', response.data);
 
       // Success feedback
       setSuccessMessage("Talent successfully added!");
@@ -113,8 +122,12 @@ function Talent() {
       setTimeout(() => {
         handleReset();
       }, 3000);
+    } catch (error) {
+      console.error('Error adding talent:', error);
+      setErrors({ form: 'Failed to add talent. Please try again.' });
     }
-  };
+  }
+};
 
   return (
     <div className="talent-container">
