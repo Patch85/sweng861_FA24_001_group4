@@ -15,13 +15,13 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB connection setup
-const mongoURI = 'mongodb://localhost:27017/your-database-name';  // Replace 'your-database-name' with your actual DB name
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose
+  .connect(process.env.DATABASE_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log('MongoDB connected...'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 // Use authentication routes
 app.use('/', authRoutes);
