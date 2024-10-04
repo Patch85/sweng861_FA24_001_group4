@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  user-management:
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    ports:
+      - '5001:3000'
+    env_file:
+      - ./services/user-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+
+  talent-management:
+    build:
+      context: ./services/talent-management
+      dockerfile: Dockerfile
+    ports:
+      - '5002:3000'
+    env_file:
+      - ./services/talent-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+
+  project-management:
+    build:
+      context: ./services/project-management
+      dockerfile: Dockerfile
+    ports:
+      - '5003:3000'
+    env_file:
+      - ./services/project-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+
+  notifications:
+    build:
+      context: ./services/notifications
+      dockerfile: Dockerfile
+    ports:
+      - '5004:3000'
+    env_file:
+      - ./services/notifications/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+
+  front-end-tms:
+    build:
+      context: ./services/front-end/tms
+      dockerfile: Dockerfile
+    container_name: front-end-tms
+    ports:
+      - '3000:3000'
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27018:27017' # Changed port mapping
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

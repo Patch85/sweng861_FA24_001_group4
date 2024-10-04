@@ -6,13 +6,10 @@
   "directories": {
     "doc": "docs"
   },
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "sweng861-fa24-001-group4",
   "license": "MIT",
   "workspaces": [
+    "services/front-end/tms",
     "services/notifications",
     "services/project-management",
     "services/talent-management",
