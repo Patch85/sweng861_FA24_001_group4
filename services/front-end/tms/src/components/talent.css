@@ -223,5 +223,46 @@ body {
   text-decoration: underline;
 }
 
+/* Style for the search input box */
+.search-box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 
+/* Style for the talent list */
+.talent-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style for each talent item */
+.talent-list li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the highlighted text */
+.talent-list li strong {
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* General container adjustments for the Find Talent tab */
+.find-talent {
+  margin-top: 20px;
+}
+
+/* Add hover effect on list items for better UI */
+.talent-list li:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
   
