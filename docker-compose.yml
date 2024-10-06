@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  user-management:
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    ports:
+      - '5001:5001'
+    env_file:
+      - ./services/user-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    networks:
+      - tms-app-network
+
+  talent-management:
+    build:
+      context: ./services/talent-management
+      dockerfile: Dockerfile
+    ports:
+      - '5002:5002'
+    env_file:
+      - ./services/talent-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    networks:
+      - tms-app-network
+
+  project-management:
+    build:
+      context: ./services/project-management
+      dockerfile: Dockerfile
+    ports:
+      - '5003:5003'
+    env_file:
+      - ./services/project-management/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    networks:
+      - tms-app-network
+
+  notifications:
+    build:
+      context: ./services/notifications
+      dockerfile: Dockerfile
+    ports:
+      - '5004:5004'
+    env_file:
+      - ./services/notifications/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    networks:
+      - tms-app-network
+
+  front-end-tms:
+    build:
+      context: ./services/front-end/tms
+      dockerfile: Dockerfile
+    container_name: front-end-tms
+    ports:
+      - '3000:3000'
+    networks:
+      - tms-app-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - '27018:27017' # Changed port mapping
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - tms-app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  tms-app-network:
+    driver: bridge

@@ -3,9 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const talentRoutes = require('./src/routes/talentRoutes');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const app = express();
+
+const allowedOrigins = [
+  process.env.CORS_ORIGIN_FRONTEND_PROJECT_MANAGEMENT,
+  process.env.CORS_ORIGIN_FRONTEND_TMS,
+  process.env.CORS_ORIGIN_USER_MANAGEMENT,
+  process.env.CORS_ORIGIN_PROJECT_MANAGEMENT,
+  process.env.CORS_ORIGIN_NOTIFICATIONS,
+];
 
 // Connect to the database
 mongoose.connect(process.env.DATABASE_URI, {
@@ -13,9 +20,11 @@ mongoose.connect(process.env.DATABASE_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(cors({
-  origin: 'http://localhost:3000',  // The origin of your frontend
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 
 app.use(cors());
 app.use(express.json());

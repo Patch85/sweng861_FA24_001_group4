@@ -2,10 +2,10 @@
 FROM node:18-alpine
 
 # Set the working directory in the container
-WORKDIR /app/user-management
+WORKDIR /app/front-end/tms
 
 # Copy the package.json and package-lock.json files
-COPY package*.json .
+COPY package*.json ./
 
 # Install the dependencies
 RUN npm install
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Copy .env file
-COPY .env /app/user-management/.env
+COPY .env /app/front-end/tms/.env
 
 # Expose the application's port
 EXPOSE 3000
