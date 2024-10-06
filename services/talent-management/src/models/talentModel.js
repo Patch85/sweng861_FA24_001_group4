@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const talentSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -13,7 +13,16 @@ const talentSchema = new mongoose.Schema({
     endDate: { type: Date, required: true },
   },
   skills: [String],
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Reference to the user who added the talent
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const Talent = mongoose.model('Talent', talentSchema);
+const Talent = mongoose.model("Talent", talentSchema);
 module.exports = Talent;

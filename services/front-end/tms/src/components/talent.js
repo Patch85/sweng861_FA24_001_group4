@@ -23,6 +23,10 @@ function Talent() {
   const [talents, setTalents] = useState([]); // Store fetched talents
   const [searchQuery, setSearchQuery] = useState(""); // Store search input
 
+  // CSV file-related state
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [csvError, setCsvError] = useState("");
+
   // Pre-populated skills
   const prePopulatedSkills = [
     "JavaScript",
@@ -53,6 +57,9 @@ function Talent() {
     setCurrentSkill("");
     setErrors({});
     setSuccessMessage("");
+    setSelectedFile(null); // If a file was selected
+    setCsvError(""); // Clear any error messages
+    setSuccessMessage(""); // Clear the success message
   };
 
   // Handle adding custom skill
@@ -187,6 +194,94 @@ function Talent() {
     }
   };
 
+  // Handle file selection
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
+
+  // CSV Processing Logic (to be executed on submit)
+  // Skipping the header row and ignoring empty rows
+  const processCSVData = (csvData) => {
+    const rows = csvData.split("\n");
+
+    // Skip the header by slicing the array from index 1
+    const talents = rows.slice(1).map((row) => {
+      const columns = row.split(",");
+      return {
+        firstName: columns[0].trim(),
+        lastName: columns[1].trim(),
+        position: columns[2].trim(),
+        experienceLevel: columns[3].trim(),
+        location: columns[4].trim(),
+        email: columns[5].trim(),
+        phoneNumber: columns[6].trim(),
+        availability: {
+          startDate: columns[7].trim(),
+          endDate: columns[8].trim(),
+        },
+        skills: columns[9]
+          ? columns[9].split(",").map((skill) => skill.trim())
+          : [],
+      };
+    });
+
+    // Filter out any rows that have empty required fields
+    const validTalents = talents.filter(
+      (talent) =>
+        talent.firstName && talent.lastName && talent.position && talent.email
+    );
+
+    return validTalents;
+  };
+
+  // Handle form submission (including CSV processing)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const csvData = event.target.result;
+
+        // Process CSV and send to backend
+        const parsedData = processCSVData(csvData);
+
+        if (parsedData.length === 0) {
+          setCsvError("No valid rows found in the CSV.");
+          return; // Prevent upload if no valid rows are present
+        }
+
+        try {
+          const response = await axios.post("http://localhost:5002/upload", {
+            talents: parsedData,
+          });
+          console.log("CSV data successfully uploaded", response.data);
+
+          if (response.status === 201) {
+            setSuccessMessage("CSV upload successful!");
+            setTimeout(() => {
+              handleReset();
+            }, 3000);
+          }
+        } catch (err) {
+          if (err.response && err.response.status === 400) {
+            // Display validation errors to the user
+            setCsvError("Some rows in the CSV have errors.");
+            console.error(err.response.data.errors);
+          } else {
+            setCsvError("Failed to upload CSV. Please try again.");
+          }
+          console.error("Error uploading CSV data:", err);
+        }
+      };
+
+      reader.readAsText(selectedFile); // Start reading the file
+    } else {
+      setCsvError("Please select a CSV file before submitting.");
+    }
+  };
+
   return (
     <div className="talent-container">
       <h1 className="talent-title">Talent</h1>
@@ -228,25 +323,23 @@ function Talent() {
             {filteredTalents.length === 0 ? (
               <p>No talent found.</p>
             ) : (
-              <ul>
-                {filteredTalents.map((talent, index) => (
-                  <li key={index}>
-                    <strong>
-                      {talent.firstName} {talent.lastName}
-                    </strong>{" "}
-                    - {talent.position}
-                    <br />
-                    Skills: {talent.skills.join(", ")}
-                    <br />
+              filteredTalents.map((talent, index) => (
+                <div className="talent-card" key={index}>
+                  <strong>
+                    {talent.firstName} {talent.lastName}
+                  </strong>{" "}
+                  - {talent.position}
+                  <p>Skills: {talent.skills.join(", ")}</p>
+                  <p>
                     Availability:{" "}
                     {new Date(
                       talent.availability.startDate
                     ).toLocaleDateString()}
                     to{" "}
                     {new Date(talent.availability.endDate).toLocaleDateString()}
-                  </li>
-                ))}
-              </ul>
+                  </p>
+                </div>
+              ))
             )}
           </div>
         </div>
@@ -284,7 +377,6 @@ function Talent() {
           )}
 
           {/* Other form fields */}
-
           <div className="form-row">
             <input
               type="text"
@@ -435,6 +527,18 @@ function Talent() {
               Reset
             </button>
           </div>
+
+          {/* File upload for CSV */}
+          <div className="csv-upload-form">
+            <input type="file" accept=".csv" onChange={handleFileChange} />
+            <button type="submit" className="submit-btn" onClick={handleSubmit}>
+              Upload CSV
+            </button>
+          </div>
+          {csvError && <p className="error-message">{csvError}</p>}
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
         </form>
       )}
     </div>
