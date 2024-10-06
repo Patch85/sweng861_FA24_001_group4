@@ -5,12 +5,12 @@ FROM node:18-alpine
 WORKDIR /app/front-end/tms
 
 # Copy the package.json and package-lock.json files
-COPY package*.json .
+COPY package*.json ./
 
 # Install the dependencies
 RUN npm install
 
-# Copy .env file
+# Copy the rest of the application code
 COPY . .
 
 # Copy .env file
