@@ -1,213 +1,190 @@
 /* Ensure the entire page has the background color */
 body {
-    background-color: #45525a;  /* Set the background color */
-    margin: 0;
-    height: 100vh;  /* Cover the entire viewport */
-  }
-  
-  /* General Layout */
-  .talent-container {
-    padding: 20px;
-    background-color: #45525a;
-    color: white;
-    min-height: 100vh;  /* Ensure container covers the entire height */
-  }
-  
-  .talent-title {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-  }
-  
-  /* Tabs */
-  .tab-buttons {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .tab {
-    background-color: #fff;
-    color: #45525a;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px 5px 0 0;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .tab.active {
-    background-color: #ddd;
-  }
-  
-  .talent-form {
-    background-color: #fff;
-    color: #45525a;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  /* Form Row Layout */
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    align-items: center;  /* Ensure vertical alignment */
-  }
-  
-  /* Add margin between rows */
-  .form-row + .form-row {
-    margin-top: 15px;
-  }
-  
-  .input-field, .select-field {
-    width: 100%;  /* Make all input fields take up full width in their container */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    box-sizing: border-box;  /* Ensure padding doesn't affect width */
-    margin-right: 10px;  /* Add spacing between fields in the same row */
-  }
-  
-  /* Specific field widths */
-  .input-field.phone {
-    width: 49.2%;  /* Adjust the size of the phone number field */
-  }
-  
+  background-color: #45525a;
+  margin: 0;
+  height: 100vh;
+}
+
+/* General Layout */
+.talent-container {
+  padding: 20px;
+  background-color: #45525a;
+  color: white;
+  min-height: 100vh;
+}
+
+.talent-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tab-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  background-color: #fff;
+  color: #45525a;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #ddd;
+}
+
+.tab:hover {
+  background-color: #e2e6ea;
+}
+
+/* Form */
+.talent-form {
+  background-color: #fff;
+  color: #45525a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.form-row + .form-row {
+  margin-top: 15px;
+}
+
+.input-field,
+.select-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+.input-field.phone {
+  width: 49.2%;
+}
+
 /* Flexbox layout for Availability section */
 .availability-container {
   display: flex;
-  align-items: center;  /* Vertical alignment */
-  justify-content: flex-start;  /* Align items to the left */
-  gap: 10px;  /* Reduce space between the label and the date pickers */
+  align-items: center; /* Vertical alignment */
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Reduce space between the label and the date pickers */
 }
 
 /* Date picker fields with consistent width */
 .date-picker {
-  width: 55%;  /* Adjust the width of the date pickers */
+  width: 55%; /* Adjust the width of the date pickers */
 }
 
 /* Adjust the "to" label between the date pickers */
 .to-label {
-  margin: 0 5px;  /* Reduce the space around the "to" label */
+  margin: 0 5px; /* Reduce the space around the "to" label */
   white-space: nowrap;
 }
-  
-  /* Date Picker specific styles */
-  .date-range {
-    display: flex;
-    gap: 10px;  /* Add some space between the start and end date pickers */
-  }
-  
-  /* Skill section */
-  .form-row .add-skill-btn {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
 
-  /* Move Add Skill button next to the input */
-.skill-row {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;  /* Ensure vertical alignment */
-    gap: 0px;  /* Add space between the input and the button */
-  }
-
-/* Skill Input */
-.skill-input {
-    width: 49.3%;  /* Smaller input box for adding skills */
-  }
-  
-  /* Add Skill Button */
-  .add-skill-btn {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-left: 0;
-  }
-  
-  /* Skills Display Box */
-  .skills-display-box {
-    background-color: #f1f1f1;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    height: 150px;  /* Fixed height to accommodate multiple skills */
-    overflow-y: auto;  /* Scroll if content exceeds box height */
-  }
-  
-  /* Skill Tags */
-  .skill-tag {
-    display: inline-block;
-    background-color: #ddd;
-    color: #45525a;
-    padding: 5px 10px;
-    margin: 5px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 0.9em;
-  }
-  
-  /* Highlighted Skills */
-  .skill-tag.highlighted {
-    background-color: #28a745;  /* Highlighted skills are green */
-    color: white;
-  }
-    
-  /* Action Buttons */
-  .form-actions {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .submit-btn, .reset-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .submit-btn {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .reset-btn {
-    background-color: #dc3545;
-    color: white;
-  }
-
-  /* Error Message Styles */
-.error-message {
-  color: red;
-  font-size: 0.9em;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  text-align: left;
+/* Date Picker specific styles */
+.date-range {
+  display: flex;
+  gap: 10px; /* Add some space between the start and end date pickers */
 }
 
-/* Inline error messages */
+/* Skill section */
+.skill-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0px;
+}
+
+.skill-input {
+  width: 49.3%;
+}
+
+.add-skill-btn {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.skills-display-box {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.skill-tag {
+  display: inline-block;
+  background-color: #ddd;
+  color: #45525a;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.skill-tag.highlighted {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Action buttons */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Error and success messages */
+.error-message,
 .error-message-inline {
   color: red;
   font-size: 0.9em;
-  margin-left: 0%;  /* Add some space between the input and the error message */
-  white-space: nowrap;  /* Prevent the error message from wrapping */
 }
 
-/* Success Message Styles */
 .success-message {
-  color: rgb(238, 242, 238);
-  font-size: 1.2em;
-  margin-bottom: 20px;
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -223,5 +200,83 @@ body {
   text-decoration: underline;
 }
 
+/* Search box */
+.search-box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 
-  
+/* Talent list */
+.talent-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.talent-card {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.talent-card strong {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.talent-card p {
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Hover effect on talent cards */
+.talent-list li:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+
+/* Adjust action buttons */
+.form-actions {
+  display: flex;
+  justify-content: space-between; /* Add space between buttons */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Upload section styling */
+.upload-section {
+  margin-top: 20px; /* Add space above the upload section */
+  display: flex;
+  justify-content: flex-start; /* Align it to the left */
+  gap: 15px; /* Space between the "Choose File" and the button */
+}
+
+.submit-btn,
+.reset-btn,
+.upload-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.reset-btn {
+  background-color: #dc3545;
+  color: white;
+}
