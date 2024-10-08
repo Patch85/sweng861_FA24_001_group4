@@ -13,6 +13,22 @@ body {
   min-height: 100vh;
 }
 
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545; /* Red background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
 .talent-title {
   font-size: 2.5em;
   margin-bottom: 20px;

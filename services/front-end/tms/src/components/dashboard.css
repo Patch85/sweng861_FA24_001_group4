@@ -1,66 +1,136 @@
 /* General layout for the Dashboard */
 .dashboard-container {
-    padding: 20px;
-    background-color: #45525a;
-    color: #fff;
-    height: 100vh;
-  }
-  
-  .dashboard-title {
-    font-size: 2.5em;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Buttons for Talent and Projects */
-  .dashboard-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .dashboard-btn {
-    padding: 15px;
-    background-color: #fff;
-    color: #45525a;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 40%;
-  }
-  
-  .dashboard-btn:hover {
-    background-color: #ddd;
-  }
-  
-  /* Tabs for Projects and Talent */
-  .tabs-container {
-    display: flex;
-    justify-content: flex-start;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
-  }
-  
-  .tab {
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #45525a;
-    border-radius: 5px 5px 0 0;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .tab:hover {
-    background-color: #ddd;
-  }
-  
-  /* Content Area */
-  .content-area {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    color: #45525a;
-    height: 300px;
-  }
-  
+  padding: 20px;
+  background-color: #45525a;
+  color: #fff;
+  height: 100vh;
+}
+
+.dashboard-title {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Buttons for Talent and Projects */
+.dashboard-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  padding: 15px;
+  background-color: #fff;
+  color: #45525a;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 40%;
+}
+
+.dashboard-btn:hover {
+  background-color: #ddd;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+}
+
+.tab.active {
+  background-color: #6c757d;
+  color: white;
+}
+
+.content-area {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 200px;
+  color: #333;
+}
+
+.talent-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.talent-item {
+  background-color: #f1f1f1;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.talent-item.selected {
+  background-color: #e0f7fa;
+}
+
+.talent-details {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.talent-details input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.talent-details button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.talent-details button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.talent-details button:nth-child(2) {
+  background-color: #ffc107;
+  color: white;
+}
+
+.talent-details button:nth-child(3) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545; /* Red background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
