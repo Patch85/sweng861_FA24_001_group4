@@ -4,6 +4,7 @@ import "./talent.css"; // Assuming we will style using CSS
 import DatePicker from "react-datepicker"; // To handle date picking
 import "react-datepicker/dist/react-datepicker.css"; // DatePicker styles
 import axios from "axios"; // Import Axios
+import { useNavigate } from "react-router-dom";
 
 function Talent() {
   // State for input fields
@@ -26,6 +27,7 @@ function Talent() {
   // CSV file-related state
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvError, setCsvError] = useState("");
+  const navigate = useNavigate();
 
   // Pre-populated skills
   const prePopulatedSkills = [
@@ -148,8 +150,17 @@ function Talent() {
       };
 
       try {
+        const token = localStorage.getItem("token");
         // Send POST request to the backend service
-        const response = await axios.post("http://localhost:5002/data", talent); // Assuming Talent Management runs on port 5002
+        const response = await axios.post(
+          "http://localhost:5002/data",
+          talent,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        ); // Assuming Talent Management runs on port 5002
         console.log("Talent added successfully:", response.data);
 
         // Success feedback
@@ -253,9 +264,17 @@ function Talent() {
         }
 
         try {
-          const response = await axios.post("http://localhost:5002/upload", {
-            talents: parsedData,
-          });
+          const token = localStorage.getItem("token"); // Get the token from localStorage
+          const response = await axios.post(
+            "http://localhost:5002/upload",
+            { talents: parsedData },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Attach the token to the Authorization header
+              },
+            }
+          );
+
           console.log("CSV data successfully uploaded", response.data);
 
           if (response.status === 201) {
@@ -266,7 +285,6 @@ function Talent() {
           }
         } catch (err) {
           if (err.response && err.response.status === 400) {
-            // Display validation errors to the user
             setCsvError("Some rows in the CSV have errors.");
             console.error(err.response.data.errors);
           } else {
@@ -282,8 +300,17 @@ function Talent() {
     }
   };
 
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear the token from local storage
+    navigate("/"); // Redirect to home page
+  };
+
   return (
     <div className="talent-container">
+      <button className="logout-btn" onClick={handleLogout}>
+        Logout
+      </button>
       <h1 className="talent-title">Talent</h1>
 
       {/* Add a link to go back to the Dashboard */}

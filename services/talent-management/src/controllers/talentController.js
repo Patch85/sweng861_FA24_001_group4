@@ -1,9 +1,18 @@
 const Talent = require("../models/talentModel");
 
 // Add new talent
+// Add new talent
 exports.addTalent = async (req, res) => {
+  const userId = req.user.userId; // Extracted from JWT token in the middleware
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is missing" });
+  }
+
   try {
-    const newTalent = new Talent(req.body);
+    const newTalent = new Talent({
+      ...req.body,
+      createdBy: userId, // Associate the talent with the user from the token
+    });
     await newTalent.save();
     res.status(201).json(newTalent);
   } catch (error) {
@@ -52,6 +61,10 @@ exports.deleteTalent = async (req, res) => {
 exports.bulkUpload = async (req, res) => {
   const { talents } = req.body;
 
+  const userId = req.user.userId;
+  if (!userId) {
+    return res.status(400).json({ message: "User ID is missing" });
+  }
   // Validation function
   const validateTalent = (talent) => {
     const errors = [];
@@ -101,7 +114,11 @@ exports.bulkUpload = async (req, res) => {
           errors,
         });
       } else {
-        const newTalent = new Talent(talent);
+        // Include the `createdBy` field from the authenticated user
+        const newTalent = new Talent({
+          ...talent,
+          createdBy: req.user.userId, // Assuming `req.user` contains the userId
+        });
         await newTalent.save();
       }
     }
@@ -117,5 +134,17 @@ exports.bulkUpload = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to upload talent data" });
+  }
+};
+
+// Get talents by the request user
+exports.getUserTalents = async (req, res) => {
+  try {
+    const userId = req.user.userId; // Assuming the token contains userId
+    const talents = await Talent.find({ createdBy: userId });
+    res.status(200).json(talents);
+  } catch (error) {
+    console.error("Error fetching user talents:", error);
+    res.status(500).json({ message: "Error retrieving talents." });
   }
 };
