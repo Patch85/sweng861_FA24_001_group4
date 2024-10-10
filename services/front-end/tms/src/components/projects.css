@@ -1,0 +1,144 @@
+/* projects.css */
+
+.projects-container {
+  padding: 20px;
+  background-color: #45525a;
+  color: white;
+  min-height: 100vh;
+}
+
+.projects-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-to-dashboard-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 1em;
+  color: #cfd6de;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tab-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  background-color: #fff;
+  color: #45525a;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #6c757d;
+  color: white;
+}
+
+.content-area {
+  background-color: #ffffff;
+  color: #45525a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.add-project-container,
+.find-project-container {
+  padding: 10px;
+}
+
+/* Container for Add Project form */
+.add-project-form {
+  background-color: #fff;
+  color: #45525a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.add-project-form h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.add-project-form input,
+.add-project-form textarea,
+.add-project-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.add-project-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submit-project-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.submit-project-btn:hover {
+  background-color: #218838;
+}
+
+/* Container for Find Project list */
+.project-list {
+  background-color: #fff;
+  color: #45525a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.project-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.project-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.project-item strong {
+  font-size: 1.1em;
+  color: #333;
+}

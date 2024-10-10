@@ -131,10 +131,7 @@ function Dashboard() {
           Talent
         </button>
 
-        <button
-          className="dashboard-btn"
-          onClick={() => alert("Projects feature coming soon!")}
-        >
+        <button className="dashboard-btn" onClick={() => navigate("/projects")}>
           Projects
         </button>
       </div>
