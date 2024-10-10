@@ -1,0 +1,129 @@
+/* Ensure the entire page has the background color */
+body {
+  background-color: #45525a;
+  margin: 0;
+  height: 100vh;
+}
+
+/* General Layout */
+.project-page {
+  padding: 20px;
+  background-color: #45525a;
+  color: white;
+  min-height: 100vh;
+}
+
+/* Tabs */
+.tab-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  background-color: #fff;
+  color: #45525a;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #ddd;
+}
+
+.tab:hover {
+  background-color: #e2e6ea;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545; /* Red background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.project-title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tab-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.project-page h1 {
+  margin-bottom: 20px;
+}
+
+.project-page form {
+  background-color: #fff;
+  color: #45525a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.form-row + .form-row {
+  margin-top: 15px;
+}
+
+.input-field,
+.select-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+.project-page input,
+.project-page textarea {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.project-page .submit-btn {
+  padding: 10px 20px;
+}
+
+.project-page .error-message {
+  color: red;
+}
+
+.project-page .success-message {
+  color: green;
+}
+
+.project-list {
+  margin-top: 20px;
+}
+
+.project-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}

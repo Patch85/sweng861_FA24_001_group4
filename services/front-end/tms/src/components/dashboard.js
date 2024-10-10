@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./dashboard.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './dashboard.css';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("projects");
+  const [activeTab, setActiveTab] = useState('projects');
   const [talents, setTalents] = useState([]);
   const [selectedTalent, setSelectedTalent] = useState(null); // Track selected talent
   const [editMode, setEditMode] = useState(false); // Toggle edit mode
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   // Fetch talents when "My Talent" tab is active
   useEffect(() => {
-    if (activeTab === "talent") {
+    if (activeTab === 'talent') {
       const fetchTalents = async () => {
         try {
           setLoading(true);
-          setError("");
-          const token = localStorage.getItem("token");
+          setError('');
+          const token = localStorage.getItem('token');
           const response = await axios.get(
-            "http://localhost:5002/user-talents",
+            'http://localhost:5002/user-talents',
             {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
           setTalents(response.data);
         } catch (err) {
-          setError("Failed to load talents. Please try again.");
-          console.error("Error fetching talents:", err);
+          setError('Failed to load talents. Please try again.');
+          console.error('Error fetching talents:', err);
         } finally {
           setLoading(false);
         }
@@ -67,7 +67,7 @@ function Dashboard() {
   // Save updated talent data to the backend
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await axios.put(
         `http://localhost:5002/data/${selectedTalent._id}`,
         selectedTalent,
@@ -83,15 +83,15 @@ function Dashboard() {
       setEditMode(false);
       setSelectedTalent(null); // Clear selection after save
     } catch (error) {
-      setError("Failed to update talent.");
-      console.error("Error updating talent:", error);
+      setError('Failed to update talent.');
+      console.error('Error updating talent:', error);
     }
   };
 
   // Delete the selected talent
   const handleDelete = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       await axios.delete(`http://localhost:5002/data/${selectedTalent._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -100,22 +100,22 @@ function Dashboard() {
       );
       setSelectedTalent(null); // Clear selection after delete
     } catch (error) {
-      setError("Failed to delete talent.");
-      console.error("Error deleting talent:", error);
+      setError('Failed to delete talent.');
+      console.error('Error deleting talent:', error);
     }
   };
 
   // Helper to format dates for display
   const formatDate = (dateString) => {
-    if (!dateString) return "N/A"; // Handles cases where the date might be missing
+    if (!dateString) return 'N/A'; // Handles cases where the date might be missing
     const date = new Date(dateString);
     return date.toLocaleDateString(); // Format as "MM/DD/YYYY" or customize if needed
   };
 
   // Handle logout
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear the token from local storage
-    navigate("/"); // Redirect to home page
+    localStorage.removeItem('token'); // Clear the token from local storage
+    navigate('/'); // Redirect to home page
   };
 
   return (
@@ -127,37 +127,38 @@ function Dashboard() {
       <h1 className="dashboard-title">Dashboard</h1>
 
       <div className="dashboard-buttons">
-        <button className="dashboard-btn" onClick={() => navigate("/talent")}>
+        <button className="dashboard-btn" onClick={() => navigate('/talent')}>
           Talent
         </button>
 
-        <button
-          className="dashboard-btn"
-          onClick={() => alert("Projects feature coming soon!")}
-        >
+        <button className="dashboard-btn" onClick={() => navigate('/projects')}>
           Projects
         </button>
       </div>
 
       <div className="tabs-container">
         <div
-          className={`tab ${activeTab === "projects" ? "active" : ""}`}
-          onClick={() => setActiveTab("projects")}
+          className={`tab ${activeTab === 'projects' ? 'active' : ''}`}
+          onClick={() => setActiveTab('projects')}
         >
           My Projects
         </div>
         <div
-          className={`tab ${activeTab === "talent" ? "active" : ""}`}
-          onClick={() => setActiveTab("talent")}
+          className={`tab ${activeTab === 'talent' ? 'active' : ''}`}
+          onClick={() => setActiveTab('talent')}
         >
           My Talent
         </div>
       </div>
 
       <div className="content-area">
-        {activeTab === "projects" && <p>Projects feature coming soon...</p>}
+        {activeTab === 'projects' && (
+          <div className="project-list">
+            <p>Projects will be displayed here.</p>
+          </div>
+        )}
 
-        {activeTab === "talent" && (
+        {activeTab === 'talent' && (
           <div className="talent-list">
             {loading ? (
               <p>Loading talents...</p>
@@ -169,15 +170,15 @@ function Dashboard() {
                   <li
                     key={talent._id}
                     className={`talent-item ${
-                      selectedTalent?._id === talent._id ? "selected" : ""
+                      selectedTalent?._id === talent._id ? 'selected' : ''
                     }`}
                     onClick={() => handleSelectTalent(talent)}
                   >
                     <strong>
                       {talent.firstName} {talent.lastName}
-                    </strong>{" "}
-                    - {talent.position} - {talent.experienceLevel} -{" "}
-                    {talent.location} - {talent.email} - {talent.phoneNumber} -{" "}
+                    </strong>{' '}
+                    - {talent.position} - {talent.experienceLevel} -{' '}
+                    {talent.location} - {talent.email} - {talent.phoneNumber} -{' '}
                     <br />
                     Availability: {formatDate(
                       talent.availability.startDate
@@ -240,7 +241,7 @@ function Dashboard() {
                       name="startDate"
                       value={selectedTalent.availability.startDate}
                       onChange={(e) =>
-                        handleDateChange("startDate", e.target.value)
+                        handleDateChange('startDate', e.target.value)
                       }
                     />
                     <input
@@ -248,17 +249,17 @@ function Dashboard() {
                       name="endDate"
                       value={selectedTalent.availability.endDate}
                       onChange={(e) =>
-                        handleDateChange("endDate", e.target.value)
+                        handleDateChange('endDate', e.target.value)
                       }
                     />
                     <input
                       name="skills"
-                      value={selectedTalent.skills.join(", ")}
+                      value={selectedTalent.skills.join(', ')}
                       onChange={(e) =>
                         setSelectedTalent((prev) => ({
                           ...prev,
                           skills: e.target.value
-                            .split(",")
+                            .split(',')
                             .map((skill) => skill.trim()),
                         }))
                       }
@@ -272,7 +273,7 @@ function Dashboard() {
                     <p>
                       <strong>
                         {selectedTalent.firstName} {selectedTalent.lastName}
-                      </strong>{" "}
+                      </strong>{' '}
                       - {selectedTalent.position}
                     </p>
                     <button onClick={handleEdit}>Edit</button>
